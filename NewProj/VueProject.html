@@ -24,6 +24,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            cursor: pointer;
         }
         li.fav{
             background: #23295f;
@@ -45,7 +46,7 @@
 
     <div v-if="showBooks">
         <ul>
-            <li v-for="book in books" :class="{ fav : book.isFav }">
+            <li v-for="book in books" :class="{ fav : book.isFav }" @click="toggleFav(book)">
              <img :src="book.img" alt="book.title">
              <h3>{{ book.title }}</h3>
              <p>{{ book.author }}</p>
@@ -71,18 +72,28 @@
                 showBooks: true,
                 books: [
                     {title: 'AZ' , author:'Hakan Günday' , img:"/NewProj/bks.jpg" , isFav: true },
-                    {title: 'DAHA' , author:'Hakan Günday', img:"/NewProj/bks.jpg", isFav: false},
-                    {title: 'AZİL' , author:'Hakan Günday' , img:"/NewProj/bks.jpg", isFav: true},
-                    {title: 'KİNYAS ve KAYRA' , author:'Hakan Günday' , img:"/NewProj/bks.jpg", isFav: false}
+                    {title: 'DAHA' , author:'Hakan Günday', img:"/NewProj/bks.jpg", isFav:false},
+                    {title: 'AZİL' , author:'Hakan Günday' , img:"/NewProj/bks.jpg", isFav:true},
+                    {title: 'KİNYAS ve KAYRA' , author:'Hakan Günday' , img:"/NewProj/bks.jpg", isFav: true}
                 ]
            
             },
 
+          
+
             methods: {
                 toggleShowBooks(){
                     this.showBooks= !this.showBooks
+                }, 
+                toggleFav(book){
+                    book.isFav = !book.isFav
                 }
             },
+          /*  computed:{
+                filteredBooks() {
+                    return this.books.filter((book) => book.isFav)
+                }
+            }*/
 
           
         })
